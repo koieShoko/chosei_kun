@@ -23,7 +23,7 @@ EOF
 
 
 sudo mysql -u  chosei_kun  -pteamA << EOF
-DROP DATABASE chosei_kun;
+#DROP DATABASE chosei_kun;
 
 #DBを作る
 CREATE  DATABASE chosei_kun
