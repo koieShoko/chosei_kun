@@ -4,13 +4,13 @@
 
 /* 
 ※コントローラでの使用非推奨
-【1】初期化 
+【1.1】初期化 
 
 他の関数の呼び出しに先立って実行されなければならない。
 MySQLサーバに接続し、データベースを使用可能な状態にする 
 */
 $db_opened = 0;
-$mysqili = null;
+$mysqli = null;
 
 function init_db() {
 	global $db_opened;
@@ -23,6 +23,19 @@ function init_db() {
 }
 
 
+/* 
+【1.2】接続終了 
+※コントローラでの使用非推奨
+
+MySQLサーバとの接続を切る。
+*/
+
+function close_db(){
+	global $db_opened;
+	global $mysqli;
+	$mysqli->close();
+	$db_opened = 0;
+}
 
 
 
@@ -51,7 +64,8 @@ function regist_event( $event_name, $event_memo ,$url_rand ) {
     $stmt = $mysqli->prepare($sql);
 	if( $stmt->bind_param( 'sss', $event_name, $event_memo, $url_rand ) == FALSE ) return(1);
 	if( $stmt->execute() == FALSE ) return(1);
-    $stmt->close();
+	$stmt->close();
+	close_db();
 	return(0);
 }
 
@@ -82,6 +96,7 @@ function regist_event_date( $event_date, $url_rand) {
 	if( $stmt->bind_param( 'ss', $event_date, $url_rand ) == FALSE ) return(1);
     if( $stmt->execute() == FALSE ) return(1);
     $stmt->close();
+	close_db();
 	return(0);
 }
 
@@ -108,7 +123,7 @@ function exe_regist_event_and_event_date($event_name, $event_memo, $event_dates)
 		if (regist_event($event_name, $event_memo, $url_rand) == 1) return (1);
 		foreach($event_dates as $date){
 			if(regist_event_date($date,$url_rand)==1){
-				exe_regist_event_and_event_date($url_rand);
+				exe_delete_event_and_event_date($url_rand);
 				return(1);
 			}
 		}
@@ -144,13 +159,14 @@ function exe_delete_event_and_event_date($url_rand){
 	if( $stmt->bind_param( 's', $url_rand ) == FALSE ) return(1);
     if( $stmt->execute() == FALSE ) return(1);
     $stmt->close();
+	close_db();
 	return(0);
 }
 
 
 
 /*
-【4】回答者の登録
+【4.1】回答者の登録
 ※コントロールモジュールからの使用非推奨
 
 引数で与えられた
@@ -175,6 +191,7 @@ function regist_member($member_name, $memmber_comment){
 	if( $stmt->bind_param( 'ss', $member_name, $memmber_comment ) == FALSE ) return(1);
     if( $stmt->execute() == FALSE ) return(1);
     $stmt->close();
+	close_db();
 	return(0);
 }
 
@@ -183,22 +200,35 @@ function regist_member($member_name, $memmber_comment){
 
 
 /*
-【4】出欠情報を登録する
+【4.2】出欠情報を登録する
 
+※コントロールモジュールからの使用非推奨
 引数で与えられた出欠情報（整数）をデータベースに登録する。
 */
-function regist_attendance($url_rand){
+function regist_attendance($member_id, $event_id, $attendace){
 	global $db_opened;
 	global $mysqli;
     if( $db_opened == 0 ) init_db();
 	$sql = '
+			INSERT INTO attendance(
+					member_id,
+					event_date_id,
+					attendance
+				)VALUE(
+					?,
+					?,
+					?
+			)
 			';
     $stmt = $mysqli->prepare($sql);
-	if( $stmt->bind_param( 's', $url_rand ) == FALSE ) return(1);
+	if( $stmt->bind_param( 'iii', $member_id, $event_id, $attendace ) == FALSE ) return(1);
     if( $stmt->execute() == FALSE ) return(1);
-    $stmt->close();
+	$stmt->close();
+	close_db();
 	return(0);
 }
+
+
 
 
 

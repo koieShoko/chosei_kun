@@ -20,6 +20,10 @@ include( "./access_db.php" );
 #echo $global_event_name;
 #echo $global_url_rand;
 #exe_delete_event_and_event_date('f3e7f412625d5f2d17c4');
-regist_member("古家","よろしく");
+#regist_member("藤原","誘ってくれてありがとう");
+regist_attendance(3,26,0);
+regist_attendance(3,27,0);
+regist_attendance(3,28,2);
+
 
 ?>
