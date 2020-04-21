@@ -89,13 +89,13 @@ function regist_event_date( $event_date, $url_rand) {
 /*
 【2.3】イベントを作成する
 
-URL用ランダム英数字（文字列）を生成。regist_eventを実行し、
-成功すれば、すべての日程候補に対して、regist_event_dateを実行する
-regist_eventに失敗した場合は10回まで再試行する。
-登録に成功した場合は、「http://127.0.0.1/chosei_kun/attendance_make.php?url_rand=」と
-URL用ランダム英数字を結合した文字列をグローバル変数
+"URL用ランダム英数字（文字列）を生成。regist_eventを実行後、成功すれば、すべての日程候補に対して、regist_event_dateを実行し、「http://127.0.0.1/chosei_kun/attendance_make.php?url_rand=」とURL用ランダム英数字を結合した文字列をグローバル変数
 　　global_url
 に格納する。
+同じURL用ランダム英数字が、データベースへ登録済であった場合は、
+regist_eventに失敗する。10回再試行しても登録に成功しない場合は、regist_event_dateを行わず処理を終了する。
+イベントを作成したが、イベント日程の作成に失敗した場合には、イベントも削除する。"
+
 */
 $grobal_url=null;
 function exe_regist_event_and_event_date($event_name, $event_memo, $event_dates){
@@ -112,6 +112,7 @@ function exe_regist_event_and_event_date($event_name, $event_memo, $event_dates)
 				return(1);
 			}
 		}
+		#URLをつくる
 		$url="http://127.0.0.1/chosei_kun/attendance_make.php?url_rand=".$url_rand;		
 		$global_url=$url;
 		return (0);
@@ -122,15 +123,12 @@ function exe_regist_event_and_event_date($event_name, $event_memo, $event_dates)
 
 
 
-
-
-
-
 /*
-【4.1】イベントの削除
-
-引数で与えられたイベントURL用ランダム英数字（文字列）を持つ
-レコードをデータベースから削除する。
+【3】イベントの削除
+引数で与えられたイベントURL用ランダム英数字（文字列）に関連するレコードを
+①イベント表
+②イベント日程表
+のテーブルから削除する。
 */
 function exe_delete_event_and_event_date($url_rand){
 	global $db_opened;
@@ -148,4 +146,72 @@ function exe_delete_event_and_event_date($url_rand){
     $stmt->close();
 	return(0);
 }
+
+
+
+/*
+【4】回答者の登録
+※コントロールモジュールからの使用非推奨
+
+引数で与えられた
+①　回答者名（文字列）
+②　コメント（文字列）
+をデータベースに登録する。
+*/
+function regist_member($member_name, $memmber_comment){
+	global $db_opened;
+	global $mysqli;
+    if( $db_opened == 0 ) init_db();
+	$sql = '
+			INSERT INTO member (
+					member_name,
+					member_comment
+				)VALUE(
+					?,
+					?
+				)
+			';
+    $stmt = $mysqli->prepare($sql);
+	if( $stmt->bind_param( 'ss', $member_name, $memmber_comment ) == FALSE ) return(1);
+    if( $stmt->execute() == FALSE ) return(1);
+    $stmt->close();
+	return(0);
+}
+
+
+
+
+
+/*
+【4】出欠情報を登録する
+
+引数で与えられた出欠情報（整数）をデータベースに登録する。
+*/
+function regist_attendance($url_rand){
+	global $db_opened;
+	global $mysqli;
+    if( $db_opened == 0 ) init_db();
+	$sql = '
+			';
+    $stmt = $mysqli->prepare($sql);
+	if( $stmt->bind_param( 's', $url_rand ) == FALSE ) return(1);
+    if( $stmt->execute() == FALSE ) return(1);
+    $stmt->close();
+	return(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

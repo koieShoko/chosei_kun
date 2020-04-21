@@ -19,8 +19,7 @@ include( "./access_db.php" );
 #regist_event_date('今日',3);
 #echo $global_event_name;
 #echo $global_url_rand;
-exe_delete_event_and_event_date('f3e7f412625d5f2d17c4');
-
-
+#exe_delete_event_and_event_date('f3e7f412625d5f2d17c4');
+regist_member("古家","よろしく");
 
 ?>
