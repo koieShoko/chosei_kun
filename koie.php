@@ -36,11 +36,16 @@ include( "./access_db.php" );
 
 
 
-exe_get_event_name_sum_member_event_memo('d9ad03106319871646fe');
-echo $global_event_name;
-echo $global_sum_member;
-echo $global_event_memo;
+#exe_get_event_name_sum_member_event_memo('d9ad03106319871646fe');
+#echo $global_event_name;
+#echo $global_sum_member;
+#echo $global_event_memo;
 
+get_member_names('d9ad03106319871646fe');
+foreach($global_member_names as $member_name){
+    echo $member_name;
+
+}
 
 
 

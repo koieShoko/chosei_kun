@@ -370,5 +370,78 @@ function exe_get_event_name_sum_member_event_memo($url_rand){
 
 
 
+/*
+
+【7】回答者の名前一覧を取得する
+
+
+引数で与えられたイベントURL用ランダム英数字（文字列）を持つレコードを取得し、
+①回答者の名前（配列・整数）は
+　グローバル変数global_member_names
+に格納する
+
+*/
+
+
+$global_member_names=null;
+function get_member_names($url_rand){
+	global $db_opened;
+	global $mysqli;
+	global $global_member_names;
+	$global_member_names=[];
+	if( $db_opened == 0 ) init_db();
+	$stmt = $mysqli->prepare
+	("
+		SELECT  
+			DISTINCT 
+				member.member_name  
+			FROM  
+				member 
+			INNER JOIN  
+					attendance 
+				ON   
+					member.member_id = attendance.member_id  
+			INNER JOIN 
+					event_date 
+				ON 
+					attendance.event_date_id = event_date.event_date_id 
+			INNER JOIN 
+					event  
+				ON 
+					event_date.event_id = event.event_id 
+			WHERE  
+				event.url_rand = ? 
+	");
+	if( 
+			$stmt->bind_param( 's', $url_rand )
+		and
+			$stmt->execute() 
+		and	
+			$stmt->store_result()
+		and	
+			$stmt->num_rows > 0//少なくとも1件のレコードがヒット
+		and
+			$stmt->bind_result( $member_name ) 
+	){
+		while($stmt->fetch())
+		{
+			$global_member_names[]=$member_name;
+		}
+		$stmt->close();
+		close_db();
+		return (0);
+	}else
+	{
+		$stmt->close();
+		close_db();		
+		return (1);
+	}
+}
+		
+	
+
+
+
+
 
 
