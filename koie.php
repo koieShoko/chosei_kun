@@ -20,10 +20,31 @@ include( "./access_db.php" );
 #echo $global_event_name;
 #echo $global_url_rand;
 #exe_delete_event_and_event_date('f3e7f412625d5f2d17c4');
-#regist_member("藤原","誘ってくれてありがとう");
-regist_attendance(3,26,0);
-regist_attendance(3,27,0);
-regist_attendance(3,28,2);
+#regist_member("石田","いつでもいいよ");
+#regist_attendance(4,26,0);
+#regist_attendance(4,27,0);
+#regist_attendance(4,28,2);
+#exe_delete_member_and_attendance(6);
+#echo $global_member_id;
+
+#$date_ids_and_attendances=array
+#(
+#    27=>1,
+#    28=>0
+#);
+#exe_regist_member_and_attendance("大山","助かるよ",$date_ids_and_attendances);
+
+
+
+exe_get_event_name_sum_member_event_memo('d9ad03106319871646fe');
+echo $global_event_name;
+echo $global_sum_member;
+echo $global_event_memo;
+
+
+
+
+
 
 
 ?>

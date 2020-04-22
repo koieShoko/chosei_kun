@@ -35,6 +35,7 @@ function close_db(){
 	global $mysqli;
 	$mysqli->close();
 	$db_opened = 0;
+	return (0);
 }
 
 
@@ -174,10 +175,13 @@ function exe_delete_event_and_event_date($url_rand){
 ②　コメント（文字列）
 をデータベースに登録する。
 */
+$global_member_id = null;
 function regist_member($member_name, $memmber_comment){
 	global $db_opened;
 	global $mysqli;
-    if( $db_opened == 0 ) init_db();
+	global $global_member_id;
+	$global_member_id= null;
+	if( $db_opened == 0 ) init_db();
 	$sql = '
 			INSERT INTO member (
 					member_name,
@@ -189,7 +193,8 @@ function regist_member($member_name, $memmber_comment){
 			';
     $stmt = $mysqli->prepare($sql);
 	if( $stmt->bind_param( 'ss', $member_name, $memmber_comment ) == FALSE ) return(1);
-    if( $stmt->execute() == FALSE ) return(1);
+	if( $stmt->execute() == FALSE ) return(1);
+	$global_member_id=$stmt->insert_id;
     $stmt->close();
 	close_db();
 	return(0);
@@ -205,7 +210,8 @@ function regist_member($member_name, $memmber_comment){
 ※コントロールモジュールからの使用非推奨
 引数で与えられた出欠情報（整数）をデータベースに登録する。
 */
-function regist_attendance($member_id, $event_id, $attendace){
+
+function regist_attendance($member_id, $event_date_id, $attendace){
 	global $db_opened;
 	global $mysqli;
     if( $db_opened == 0 ) init_db();
@@ -221,9 +227,60 @@ function regist_attendance($member_id, $event_id, $attendace){
 			)
 			';
     $stmt = $mysqli->prepare($sql);
-	if( $stmt->bind_param( 'iii', $member_id, $event_id, $attendace ) == FALSE ) return(1);
+	if( $stmt->bind_param( 'iii', $member_id, $event_date_id, $attendace ) == FALSE ) return(1);
     if( $stmt->execute() == FALSE ) return(1);
 	$stmt->close();
+	close_db();
+	return(0);
+}
+
+
+/*
+
+【4.3】回答者と出欠を登録する
+
+引数で与えられた出欠情報（整数）をデータベースに登録する。
+*/
+
+
+function exe_regist_member_and_attendance($member_name, $member_comment, $event_date_ids_and_attendances){
+	global $global_member_id;
+	$global_member_id = null;
+	if(regist_member($member_name, $member_comment)==1)return (0);
+	foreach($event_date_ids_and_attendances as $event_date_id=>$attendance){
+		if(regist_attendance($global_member_id, $event_date_id, $attendance)==1){
+			exe_delete_member_and_attendance($grobal_member_id);	
+			return(1);
+		}
+	}
+	$global_member_id = null;
+	return (0);
+}
+
+
+/*
+【5】 回答者情報と出席の削除
+
+引数で与えられた回答者idに関連するレコードを
+①回答者表
+②出欠表
+のテーブルから削除する。
+*/
+
+function exe_delete_member_and_attendance($member_id){
+	global $db_opened;
+	global $mysqli;
+    if( $db_opened == 0 ) init_db();
+	$sql = 'DELETE  
+				FROM  
+					member
+				WHERE  
+					member_id = ? 
+			';
+    $stmt = $mysqli->prepare($sql);
+	if( $stmt->bind_param( 's', $member_id ) == FALSE ) return(1);
+    if( $stmt->execute() == FALSE ) return(1);
+    $stmt->close();
 	close_db();
 	return(0);
 }
@@ -233,9 +290,79 @@ function regist_attendance($member_id, $event_id, $attendace){
 
 
 
+/*
+
+【6.1】
+イベント名・回答者数・詳細 をグローバル変数に格納
+
+引数で与えられたイベントURL用ランダム英数字（文字列）を持つレコードを取得し、
+①イベント名（文字列）は
+　グローバル変数　global_event_name
+②回答者の合計人数（整数）は
+　グローバル変数　global_sum_member
+③イベントの説明文（文字列）は
+　グローバル変数　global_event_memo
+に格納する。
 
 
+*/
 
+$global_event_name=null;
+$global_sum_member=null;
+$global_event_memo=null;
+function exe_get_event_name_sum_member_event_memo($url_rand){
+	global $db_opened;
+	global $mysqli;
+	global $global_event_name;
+	global $global_sum_member;
+	global $global_event_memo;
+	if( $db_opened == 0 ) init_db();
+	$stmt = $mysqli->prepare("
+		SELECT 
+				event.event_name,
+				count(member.member_id),
+				event.event_memo
+
+			FROM 
+				member
+			INNER JOIN 
+					attendance
+				ON 
+					member.member_id = attendance.member_id 
+			INNER JOIN
+					event_date
+				ON
+					attendance.event_date_id = event_date.event_date_id
+			INNER JOIN
+					event
+				ON
+					event_date.event_id = event.event_id
+			WHERE 
+				event.url_rand = ?;
+				
+	");
+	if( 
+			$stmt->bind_param( 's', $url_rand )
+		and
+			$stmt->execute() 
+		and	
+			$stmt->store_result()
+		and	
+			$stmt->num_rows == 1//1件のレコードがヒット
+		and
+			$stmt->bind_result( $global_event_name, $global_sum_member, $global_event_memo ) 
+		and
+			$stmt->fetch()
+		and
+			$stmt->close()
+		and
+			close_db() == 0 //正常終了
+	){
+		return( 0 );
+	}else{
+		return( 1 );
+	}
+}
 
 
 
