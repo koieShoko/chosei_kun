@@ -17,23 +17,23 @@ include( "./access_db.php" );
 
 
 #【2.3】
-#$dates=array('4/22','4/25','4/26');
-#exe_regist_event_and_event_date('遊園地','遊びに行こう',$dates);
-
+$dates=array('4/22','4/25','4/26');
+exe_regist_event_and_event_date('見学会','職場見学ツアーです',$dates);
+echo $global_url;
 
 #【3】
 #exe_delete_event_and_event_date('afdsjsaldjlkdfjsal');
 
 
 #【4.3】
-
+/*
 $date_ids_and_attendances=array(
     27=>2,
     28=>2
 );
 exe_regist_member_and_attendance("山田","幹事ありがと",$date_ids_and_attendances);
 
-
+*/
 
 
 #【5】
@@ -42,7 +42,7 @@ exe_regist_member_and_attendance("山田","幹事ありがと",$date_ids_and_att
 
 
 #【6】
-#/*
+/*
 exe_get_event_name_sum_member_event_memo('d9ad03106319871646fe');
 echo $global_event_name;
 echo "<br>";
@@ -50,7 +50,7 @@ echo $global_sum_member;
 echo "<br>";
 echo $global_event_memo;
 echo "<br>";
-#*/
+*/
 
 /*
 #【7.1】回答者名／コメント一覧テスト用
