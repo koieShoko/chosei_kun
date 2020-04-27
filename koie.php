@@ -26,14 +26,14 @@ include( "./access_db.php" );
 
 
 #【4.3】
-/*
+
 $date_ids_and_attendances=array
 (
-    27=>2,
-    28=>2
+    1=>2,
+    2=>2
 );
 exe_regist_member_and_attendance("田中","幹事ありがと",$date_ids_and_attendances);
-*/
+
 
 
 
@@ -43,16 +43,19 @@ exe_regist_member_and_attendance("田中","幹事ありがと",$date_ids_and_att
 
 
 #【6】
-/*
+#/*
 exe_get_event_name_sum_member_event_memo('d9ad03106319871646fe');
 echo $global_event_name;
+echo "<br>";
 echo $global_sum_member;
+echo "<br>";
 echo $global_event_memo;
-*/
+echo "<br>";
+#*/
 
 /*
 #【7.1】回答者名／コメント一覧テスト用
-get_member_ids_names_comments("d9ad03106319871646fe");
+get_member_ids_names_comments("afdsjsaldjlkdfjsal");
 foreach($global_member_ids_names_comments as $key => $values){
     echo $key;
     foreach($values as $value){
@@ -65,7 +68,7 @@ foreach($global_member_ids_names_comments as $key => $values){
 
 /*
 #【7.2】出欠集計表テスト用
-get_attendance_summary('d9ad03106319871646fe');
+get_attendance_summary('afdsjsaldjlkdfjsal');
 echo "<table>";
 foreach($global_attendance_summary as $key=>$values)
 {
@@ -82,7 +85,7 @@ echo "</table>";
 
 /*
 #【7.3】日程別個人の出欠テスト
-get_attendance(10,"d9ad03106319871646fe");
+get_attendances(10,"afdsjsaldjlkdfjsal");
 echo "<table>";
 foreach($global_attendance as $values)
 {
@@ -98,14 +101,16 @@ echo "</table>";
 
 
 #【7.4】
-/*
-exe_get_attendance_condition_table("d9ad03106319871646fe");
+#/*
+exe_get_attendance_condition_table('d9ad03106319871646fe');
 
 echo "<table>";
 $i=0;
 foreach($global_attendance_condition_table as $key => $values){
     echo "<tr>";
-    if($i==1){
+    if($i==0){
+        echo "";
+    }else if($i==1){
         foreach($values as $value){
             echo "<th>",$value,"</th>";
         }
@@ -118,7 +123,7 @@ foreach($global_attendance_condition_table as $key => $values){
     $i+=1;
 }
 echo "</table>"
-/*
+#/*
 
 
 

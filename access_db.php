@@ -320,7 +320,7 @@ function exe_get_event_name_sum_member_event_memo($url_rand){
 	$stmt = $mysqli->prepare("
 		SELECT 
 				event.event_name,
-				count(member.member_id),
+				count(DISTINCT member.member_id),
 				event.event_memo
 
 			FROM 
