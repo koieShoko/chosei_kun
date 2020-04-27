@@ -40,6 +40,12 @@
         <h3>
           <?php echo $message; ?>
         </h3>
+        <br>
+        <h4>
+          <?php
+              echo '<a href=".make_event.html">TOPページに戻る';
+          ?>
+         </a></h4>
         </div>
         <div class="col-sm-2"></div>
       </div>
