@@ -27,12 +27,11 @@ include( "./access_db.php" );
 
 #【4.3】
 
-$date_ids_and_attendances=array
-(
-    1=>2,
-    2=>2
+$date_ids_and_attendances=array(
+    27=>2,
+    28=>2
 );
-exe_regist_member_and_attendance("田中","幹事ありがと",$date_ids_and_attendances);
+exe_regist_member_and_attendance("山田","幹事ありがと",$date_ids_and_attendances);
 
 
 

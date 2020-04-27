@@ -242,14 +242,14 @@ function regist_attendance($member_id, $event_date_id, $attendance){
 引数で与えられた出欠情報（整数）をデータベースに登録する。
 */
 
-
+$global_member_id = null;
 function exe_regist_member_and_attendance($member_name, $member_comment, $event_date_ids_and_attendances){
 	global $global_member_id;
 	$global_member_id = null;
 	if(regist_member($member_name, $member_comment)==1)return (0);
 	foreach($event_date_ids_and_attendances as $event_date_id=>$attendance){
 		if(regist_attendance($global_member_id, $event_date_id, $attendance)==1){
-			exe_delete_member_and_attendance($grobal_member_id);	
+			exe_delete_member_and_attendance($global_member_id);	
 			return(1);
 		}
 	}
