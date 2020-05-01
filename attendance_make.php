@@ -19,6 +19,7 @@
 
 	#イベント名と回答人数とイベント詳細をグローバル変数に入れる関数を呼び出す
 	exe_get_event_name_sum_member_event_memo($url_rand);
+	$_SESSION["url_rand"]= $url_rand;
 
 	#上記の結果が格納されたグローバル変数の内容を、セッション変数に渡す
 	$_SESSION["event_name"]= $global_event_name;

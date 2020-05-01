@@ -15,6 +15,7 @@
 	$sum_member =$_SESSION["sum_member"];
 	$event_memo =$_SESSION["event_memo"];
 	$attendance_condition=$_SESSION["attendance_condition"];
+	$url_rand =$_SESSION["url_rand"];
 
    ?>
 	<h1>調整くん</h1>       
@@ -63,21 +64,24 @@
 	echo "</table>"
 
   ?>
-  
+
+  <?php
+	//イベント日程を取得する
+	//exe_get_global_event_ids_and_names($url_rand);
+	//取得したイベント日程の配列をセッション変数に渡す
+  ?>
+
 	<!--出欠入力ボタンを表示-->
 	<br>
 	<form action="attendance_input.php" method="post" accept-charset="utf-8">
-		<input type="hidden" name="event_name" value="<?php echo $event_name; ?>">
+	<!--	<input type="hidden" name="event_name" value="<?php echo $event_name; ?>">
 		<input type="hidden" name="sum_member" value="<?php echo $sum_member; ?>">
 		<input type="hidden" name="event_memo" value="<?php echo $event_memo; ?>">
-		<input type="hidden" name="attendance_condition[]"  value="<?php echo $attendance_condition; ?>">
+		<input type="hidden" name="attendance_condition[]"  value="<?php echo $attendance_condition; ?>">  -->
 		<input type="submit" name="" value="出欠を入力する">
 	</form>
  
-	<!--$event_name =$_SESSION["event_name"];
-	$sum_member =$_SESSION["sum_member"];
-	$event_memo =$_SESSION["event_memo"];
-	$attendance_condition=$_SESSION["attendance_condition"]; -->
+
 
 
   </body>
