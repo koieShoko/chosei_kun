@@ -16,6 +16,7 @@
 	$event_memo =$_SESSION["event_memo"];
 	$attendance_condition=$_SESSION["attendance_condition"];
 	$url_rand =$_SESSION["url_rand"];
+	$ori_url =$_SESSION["ori_url"];
 
    ?>
 

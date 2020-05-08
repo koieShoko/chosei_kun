@@ -12,10 +12,16 @@
 	include( "./access_db.php" );
 
 	#URL
-	$url_rand='afdsjsaldjlkdfjsal';
+	//$url_rand='afdsjsaldjlkdfjsal';
+	$url_rand=$_GET["url_rand"]; 
+	//検索の時はlocalhost/chosei_kun/attendance_make.php?url_rand=afdsjsaldjlkdfjsal
 
 	#セッション開始
 	session_start();
+
+	//エラー時に元に戻れるようURLを記憶する
+	$ori_url="attendance_make.php?url_rand=${url_rand}";
+	$_SESSION["ori_url"]= $ori_url;
 
 	#イベント名と回答人数とイベント詳細をグローバル変数に入れる関数を呼び出す
 	exe_get_event_name_sum_member_event_memo($url_rand);
