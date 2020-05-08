@@ -41,7 +41,7 @@
         showOtherMonths: true, //他の月を表示
         selectOtherMonths: true, //上記で表示された部分を選択可能にする
         //hideIfNoPrevNext: false,
-        dateFormat: 'yy年 m月dd日 19:00〜', // 日付のテキストフォーマット
+        dateFormat: 'yy年m月d日19:00〜', // 日付のテキストフォーマット
 
         showOn: "button",
         buttonText: "カレンダーで選択",
@@ -62,6 +62,23 @@
       document.getElementById(idn).innerHTML = str.length + "文字";
     }
   </script>
+
+  <script>
+  window.document.onkeypress=lineCheck;
+  function lineCheck(e){
+    var ta=document.getElementById("date_list");
+    var col=ta.getAttribute("cols");
+    var lines=ta.value.split("\n");
+    for(var i=0;i<lines.length;i++){
+      if(lines[i].length >col){
+        lines[i]=lines[i].substr(0,col);//各行をcolsで指定した文字数に切り捨てる
+      }
+    }
+    ta.value=lines.join("\n");
+  }
+  </script>
+
+
 
 </head>
 
@@ -106,7 +123,7 @@
         </div>
         <div class="col-sm-4" align="left">
           <!-- <input type="text" name=event_name> -->
-          <!-- 検討中 入力文字数120文字まで -->
+          <!-- 入力文字数120文字まで -->
           <input type="text" name=event_name maxlength="120" onkeyup="ShowLength('inputlength', value);">
           <p id="inputlength">0文字</p>
         </div>
@@ -121,7 +138,7 @@
           <font size="5">イベント概要</font>
         </div>
         <div class="col-sm-4" align="left">
-          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="35"></textarea>
+          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard"></textarea>
         </div>
       </div>
       <div class="col-sm-4"></div>
@@ -134,7 +151,7 @@
           <font size="5">候補日</font>
         </div>
         <div class="col-sm-4" align="left">
-          <textarea name="event_dates" class="form-control" rows="10" cols="20" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
+          <textarea name="event_dates" class="form-control" rows="10" cols="50" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
           <input type="hidden" id="input" class="datepicker">
         </div>
       </div>

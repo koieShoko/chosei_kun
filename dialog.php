@@ -29,6 +29,25 @@
 </head>
 
 <body>
+  <header>
+    <div class="row bg-primary text-left">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <strong>
+          <font size="7">調整くん</font>
+        </strong>
+      </div>
+      <div class="col-sm-4 text-left">
+        <strong>
+          <p></p>
+          <p>簡単出欠管理、日程調整ツール。</p>
+          <p>効率良くスケジュールを決めましょう。</p>
+        </strong>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+  </header>
+
 
     <!--  コンテンツ  -->
     <?php
