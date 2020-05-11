@@ -26,11 +26,12 @@
 	echo "<hr>";
 	echo "<pre><h5>","  ","回答者",$sum_member,"人</h5></pre>";
   ?>
-	<!--イベント編集ボタンを表示-->
+	<!--イベント編集ボタンを表示
 	<form action="event_delete.php" method="post" accept-charset="utf-8">
 		<input type="hidden" name="aaa" value="aaa">
 		<input type="submit" name="" value="イベント編集">
 	</form>
+ -->
 
 	<h3>イベントの詳細説明</h3>
   <?php

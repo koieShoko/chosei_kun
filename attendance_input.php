@@ -69,8 +69,8 @@
 	<!--出欠入力フォーム-->
 	<form action="attendance_DBinput.php" method="post" accept-charset="utf-8">
 		<h5>名前</h5>
-			<p><font size="2">※絵文字は入力できません</font></p>
-			<input type="text" name="member_name" >
+			<p><font size="2">※絵文字は入力しないでください</font></p>
+			<input type="text" name="member_name" required>
 		<h5>日程候補</h5>
 		  <?php
 			#モデルを呼び出す
@@ -92,7 +92,7 @@
 			echo "</table>";
   		  ?>   
 		<h5>コメント</h5>
-		<input type="text" name="member_comment" >
+			<input type="text" name="member_comment" >
 		<br>
 		<!--入力ボタン -->
 		<input type="submit" name="" value="入力する">
