@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>調整くん</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+
+      });
+    });
+
+    $(function() {
+      $("#input").datepicker({
+        //カレンダー表示オプション
+        firstDay: 1, // 週の最初を月曜日（値は1）にする
+        yearSuffix: '年',
+        showMonthAfterYear: true, // カレンダー表題を”年月”の順にする
+        dayNamesMin: ['日', '月', '火', '水', '木', '金', '土'],
+        monthNames: ['1月', '2月', '3月', '4月', '5月', '6月',
+          '7月', '8月', '9月', '10月', '11月', '12月'
+        ],
+        dayNames: ['日', '月', '火', '水', '木', '金', '土'],
+        minDate: '+0d', // 本日以降の日付を選択可能に
+        maxDate: '+6m', // 半年先までの日付を選択可能に
+        showOtherMonths: true, //他の月を表示
+        selectOtherMonths: true, //上記で表示された部分を選択可能にする
+        //hideIfNoPrevNext: false,
+        dateFormat: 'yy年m月d日19:00〜', // 日付のテキストフォーマット
+
+        showOn: "button",
+        buttonText: "カレンダーで選択",
+        onSelect: function() {
+          $(this).data('datepicker').inline = true;
+          $('#date_list').val($('#date_list').val()+$(this).val()+'\n');
+        },
+        onClose: function() {
+          $(this).data('datepicker').inline = false;
+        }
+      });
+    });
+  </script>
+
+  <!-- 文字数をカウントする為のコード -->
+  <script type="text/javascript">
+    function ShowLength(idn, str){
+      document.getElementById(idn).innerHTML = str.length + "文字";
+    }
+  </script>
+
+  <script>
+  window.document.onkeypress=lineCheck;
+  function lineCheck(e){
+    var ta=document.getElementById("date_list");
+    var col=ta.getAttribute("cols");
+    var lines=ta.value.split("\n");
+    for(var i=0;i<lines.length;i++){
+      if(lines[i].length >col){
+        lines[i]=lines[i].substr(0,col);//各行をcolsで指定した文字数に切り捨てる
+      }
+    }
+    ta.value=lines.join("\n");
+  }
+  </script>
+
+
+
+</head>
+
+<body class="bg-light">
+
+  <header>
+    <div class="row bg-primary text-left">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <strong>
+          <font size="7">調整くん</font>
+        </strong>
+      </div>
+      <div class="col-sm-4 text-left">
+        <strong>
+          <p></p>
+          <p>簡単出欠管理、日程調整ツール。</p>
+          <p>効率良くスケジュールを決めましょう。</p>
+        </strong>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+  </header>
+
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-5 text-left">
+      <font size="5">30秒で作れる!簡単出欠表</font>
+    </div>
+    <div class="col-sm-7"></div>
+  </div>
+
+  <br>
+  <br>
+
+  <form action="./register_event.php" method="post">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-7 text-left">
+        <div class="col-sm-3">
+          <font size="5">イベント名</font>
+        </div>
+        <div class="col-sm-4" align="left">
+          <!-- <input type="text" name=event_name> -->
+          <!-- 入力文字数120文字まで -->
+          <input type="text" name=event_name maxlength="120" onkeyup="ShowLength('inputlength', value);">
+          <p id="inputlength">0文字</p>
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-7 text-left">
+        <div class="col-sm-3">
+          <font size="5">イベント概要</font>
+        </div>
+        <div class="col-sm-4" align="left">
+          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard"></textarea>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-7 text-left">
+        <div class="col-sm-3">
+          <font size="5">候補日</font>
+        </div>
+        <div class="col-sm-4" align="left">
+          <textarea name="event_dates" class="form-control" rows="10" cols="50" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
+          <input type="hidden" id="input" class="datepicker">
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-7">
+        <div class="col-sm-3">
+          <input type="submit" value="イベントを作成する">
+        </div>
+        <div class="col-sm-4">
+          <input type="reset" value="リセット">
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+
+  </form>
+
+
+
+</body>
+
+</html>
