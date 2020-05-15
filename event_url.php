@@ -61,6 +61,7 @@
         <div class="col-sm-8">
         <h3>
           <?php echo 'イベント作成完了しました';?>
+          <br>
           <?php echo $url; ?>
 
         </h3>

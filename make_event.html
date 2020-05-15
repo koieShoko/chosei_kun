@@ -120,12 +120,13 @@
       <div class="col-sm-7 text-left">
         <div class="col-sm-3">
           <font size="5">イベント名</font>
+          <p>120文字まで入力可能です。</p>
         </div>
         <div class="col-sm-4" align="left">
           <!-- <input type="text" name=event_name> -->
           <!-- 入力文字数120文字まで -->
-          <input type="text" name=event_name maxlength="120" onkeyup="ShowLength('inputlength', value);">
-          <p id="inputlength">0文字</p>
+          <input type="text" name=event_name maxlength="120" onkeyup="ShowLength('inputlength1', value);">
+          <p id="inputlength1">0文字</p>
         </div>
       </div>
       <div class="col-sm-3"></div>
@@ -136,9 +137,11 @@
       <div class="col-sm-7 text-left">
         <div class="col-sm-3">
           <font size="5">イベント概要</font>
+          <p>300文字まで入力可能です。</p>
         </div>
         <div class="col-sm-4" align="left">
-          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard"></textarea>
+          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard" onkeyup="ShowLength('inputlength2', value);"></textarea>
+          <p id="inputlength2">0文字</p>
         </div>
       </div>
       <div class="col-sm-4"></div>
@@ -149,6 +152,7 @@
       <div class="col-sm-7 text-left">
         <div class="col-sm-3">
           <font size="5">候補日</font>
+          <p>候補日程/日時を入力してください。候補の区切りは改行で判断されます。</p>
         </div>
         <div class="col-sm-4" align="left">
           <textarea name="event_dates" class="form-control" rows="10" cols="50" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
