@@ -5,7 +5,6 @@
 /* 
 ※コントローラでの使用非推奨
 【1.1】初期化 
-
 他の関数の呼び出しに先立って実行されなければならない。
 MySQLサーバに接続し、データベースを使用可能な状態にする 
 */
@@ -26,7 +25,6 @@ function init_db() {
 /* 
 【1.2】接続終了 
 ※コントローラでの使用非推奨
-
 MySQLサーバとの接続を切る。
 */
 
@@ -44,7 +42,6 @@ function close_db(){
 /*
 ※コントローラでの使用非推奨
 【2.1】 イベントを登録する 
-
 引数で与えられたURL用ランダム英数字（文字列）を持つイベントの
 ①イベント日程（文字列）を
 データベースに登録する。
@@ -73,7 +70,6 @@ function regist_event( $event_name, $event_memo ,$url_rand ) {
 
 /*
 【2.2】イベント日程を登録する  ※コントローラでの使用非推奨
-
 引数で与えられたURL用ランダム英数字（文字列）を持つイベントの
 ①イベント日程（文字列）を
 データベースに登録する。
@@ -104,14 +100,12 @@ function regist_event_date( $event_date, $url_rand) {
 
 /*
 【2.3】イベントと日程を同時に登録する
-
 "URL用ランダム英数字（文字列）を生成。regist_eventを実行後、成功すれば、すべての日程候補に対して、regist_event_dateを実行し、「http://127.0.0.1/chosei_kun/attendance_make.php?url_rand=」とURL用ランダム英数字を結合した文字列をグローバル変数
 　　global_url
 に格納する。
 同じURL用ランダム英数字が、データベースへ登録済であった場合は、
 regist_eventに失敗する。10回再試行しても登録に成功しない場合は、regist_event_dateを行わず処理を終了する。
 イベントを作成したが、イベント日程の作成に失敗した場合には、イベントも削除する。"
-
 */
 $grobal_url=null;
 function exe_regist_event_and_event_date($event_name, $event_memo, $event_dates){
@@ -169,7 +163,6 @@ function exe_delete_event_and_event_date($url_rand){
 /*
 【4.1】回答者の登録
 ※コントロールモジュールからの使用非推奨
-
 引数で与えられた
 ①　回答者名（文字列）
 ②　コメント（文字列）
@@ -206,7 +199,6 @@ function regist_member($member_name, $memmber_comment){
 
 /*
 【4.2】出欠を登録する
-
 ※コントロールモジュールからの使用非推奨
 引数で与えられた出欠情報（整数）をデータベースに登録する。
 */
@@ -236,9 +228,7 @@ function regist_attendance($member_id, $event_date_id, $attendance){
 
 
 /*
-
 【4.3】回答者と出欠を同時に登録する
-
 引数で与えられた出欠情報（整数）をデータベースに登録する。
 */
 
@@ -260,7 +250,6 @@ function exe_regist_member_and_attendance($member_name, $member_comment, $event_
 
 /*
 【5】 回答者情報と出席の削除
-
 引数で与えられた回答者idに関連するレコードを
 ①回答者表
 ②出欠表
@@ -291,10 +280,8 @@ function exe_delete_member_and_attendance($member_id){
 
 
 /*
-
 【6.1】
 イベント名・回答者数・詳細 を取得
-
 引数で与えられたイベントURL用ランダム英数字（文字列）を持つレコードを取得し、
 ①イベント名（文字列）は
 　グローバル変数　global_event_name
@@ -303,8 +290,6 @@ function exe_delete_member_and_attendance($member_id){
 ③イベントの説明文（文字列）は
 　グローバル変数　global_event_memo
 に格納する。
-
-
 */
 
 $global_event_name=null;
@@ -322,7 +307,6 @@ function exe_get_event_name_sum_member_event_memo($url_rand){
 				event.event_name,
 				count(DISTINCT member.member_id),
 				event.event_memo
-
 			FROM 
 				member
 			INNER JOIN 
@@ -371,9 +355,7 @@ function exe_get_event_name_sum_member_event_memo($url_rand){
 
 
 /*
-
 【7.1】回答者の名前とコメントの一覧を取得する
-
 引数で与えられたイベントURL用ランダム英数字（文字列）を持つレコードを取得し、
 　回答者ID（整数）
 をキーとし、以下の要素を持つ配列を値とする連想配列を作成し、グローバル変数
@@ -382,7 +364,6 @@ function exe_get_event_name_sum_member_event_memo($url_rand){
 ①回答者の名前（配列・整数）
 ②回答者のコメント（配列・文字列）
 である。
-
 */
 
 
@@ -443,9 +424,7 @@ function get_member_ids_names_comments($url_rand){
 
 
 /*
-
 【7.2】全日程の出欠集計を取得する
-
 引数で与えられたイベントURL用ランダム英数字（文字列）を持つレコードを取得し、
 　日程候補ID（整数）
 をキーとし、以下の要素を持つ配列を値とする連想配列を作成し、グローバル変数
@@ -456,7 +435,6 @@ function get_member_ids_names_comments($url_rand){
 ③　△を選んだ回答者の人数（整数）
 ④　×を選んだ回答者の人数（整数）
 である。
-
 */
 
 $global_attendance_summary=null;
@@ -518,15 +496,11 @@ function get_attendance_summary($url_rand){
 
 
 /*
-
 【7.3】出欠を取得する
-
 引数で与えられた日程ID（整数）を持つレコードを取得し、
 参加者ごとの出欠を要素とする配列をグローバル変数
 　$global_attendance
 に格納する。
-
-
 */
 
 $global_attendance=null;
@@ -587,9 +561,7 @@ function get_attendances($event_date_id){
 
 
 /*
-
 【7.4】出欠状況表に必要な情報を取得する
-
 url用ランダム英数字（文字列）を引数として渡し、
 7-1 get_member_ids_names_comments()
 7-2 get_attendance_summary()
@@ -600,7 +572,6 @@ url用ランダム英数字（文字列）を引数として渡し、
 要素2  			「"日程"」、「"○"」、「"△"」、「"×"」、回答者名（人数分）
 要素3...n行目 	日程名、○選択者の人数、△選択者の人数、×選択者の人数、回答者各個人の回答（人数分）
 最終行			 空文字、空文字、空文字、空文字、回答者のコメント（人数分）
-
 */
 #/*
 $global_attendance_condition_table=null;
@@ -671,7 +642,6 @@ function exe_get_attendance_condition_table($url_rand){
 
 /*
 【8】イベント日程を取得する
-
 引数で与えられたイベントURL用ランダム英数字（文字列）を持つレコードを取得し、
 ①イベント日程id（整数）をキー
 　イベント日程（配列・文字列）を値とする
@@ -724,3 +694,7 @@ function exe_get_global_event_ids_and_names($url_rand){
 		}
 	
 }
+
+
+
+

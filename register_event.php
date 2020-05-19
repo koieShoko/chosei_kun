@@ -39,6 +39,7 @@ session_start();
   //イベント概要を取得
   $explain = $_POST['free'];
   $explain = html($explain);
+  $explain = preg_replace('/(\t|\r\n|\r|\n)/s', '', $explain);
   $explain = delete_sc_event($explain);
 
   //dateをPOSTで受け取り,開業区切りで配列に格納
@@ -50,6 +51,8 @@ session_start();
   $dates = delete_sc_dates($dates);
   //配列の空白要素を削除
   $dates = ary_empty_delete($dates);
+
+
 
   //var_dump($dates);
 
@@ -76,9 +79,7 @@ session_start();
   }else{
     //var_dump($dates);
     //データベースへ登録
-    for($i=0; $i<count($dates); $i++) {
-      exe_regist_event_and_event_date($name, $explain, $dates);
-    }
+  exe_regist_event_and_event_date($name, $explain, $dates);
     $_SESSION[ 'url' ] = $global_url;
     // $_SESSION[ 'message' ] = "<h4>成功</h4>";
     header( "Location: ./event_url.php");
