@@ -3,6 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>調整くん</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
   <body>
 
@@ -11,7 +12,7 @@
 	//セッション開始
 	session_start();
 	$ori_url =$_SESSION["ori_url"];
-	echo $ori_url;
+	//echo $ori_url;
 	//$url="attendance_list.php";
 	
 	//エラーメッセージ
