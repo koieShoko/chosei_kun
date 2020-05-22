@@ -140,7 +140,9 @@
           <p>300文字まで入力可能です。</p>
         </div>
         <div class="col-sm-4" align="left">
-          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard" onkeyup="ShowLength('inputlength2', value);"></textarea>
+
+          <textarea name="free" maxlength="300" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard" onkeyup="ShowLength('inputlength2', value);"></textarea>
+
           <p id="inputlength2">0文字</p>
         </div>
       </div>
@@ -156,10 +158,13 @@
         </div>
         <div class="col-sm-4" align="left">
           <textarea name="event_dates" class="form-control" rows="10" cols="50" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
-          <input type="hidden" id="input" class="datepicker">
+          <!-- <input type="hidden" id="input" class="datepicker"> -->
         </div>
       </div>
-      <div class="col-sm-4"></div>
+      <div class="col-sm-2">
+            <input type="hidden" id="input" class="datepicker">
+      </div>
+      <div class="col-sm-1"></div>
     </div>
 
     <br>
