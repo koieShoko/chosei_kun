@@ -39,6 +39,12 @@
 	#上記の結果が格納されたグローバル変数の内容を、セッション変数に渡す
 	$_SESSION["attendance_condition"]= $global_attendance_condition_table;
 
+
+	//イベント日程を取得する
+	exe_get_global_event_ids_and_names($url_rand);
+	//取得したイベント日程の配列を格納
+	$_SESSION["event_ids_and_names"]=$global_event_ids_and_names;
+
 	#閲覧画面へ遷移
 	header("Location: attendance_list.php");
 	exit();

@@ -26,27 +26,25 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
+    <link rel="stylesheet" href="stylesheet.css" >
+  </head>
 
 <body>
-  <header>
-    <div class="row bg-primary text-left">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-4">
-        <strong>
-          <font size="7">調整くん</font>
-        </strong>
+<header class = "header">
+    <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+          <h1>&#x1f4dd;   調整くん</h1>
       </div>
-      <div class="col-sm-4 text-left">
-        <strong>
+      <div class="col-sm-6 text-left">
           <p></p>
           <p>簡単出欠管理、日程調整ツール。</p>
           <p>効率良くスケジュールを決めましょう。</p>
-        </strong>
       </div>
-      <div class="col-sm-2"></div>
     </div>
+  </div>
   </header>
+
 
 
     <!--  コンテンツ  -->
@@ -59,13 +57,26 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-        <h3>
-          <?php echo 'イベント作成完了しました';?>
-          <br>
-          <?php echo $url; ?>
-
-        </h3>
         <br>
+      
+        <br>
+        <h2>
+          イベント作成が完了しました
+          <br>
+        </h2>
+        <h3>
+          出欠登録ページのURL
+        </h3>
+        <h4>下記のURLをイベントの参加候補者へ共有して下さい。</h4>
+        <br>
+        <h4>
+          <?php echo '<a href="'.$url.'">'.$url.'</a>'; ?>
+        </h4>
+        <br>
+        <br>
+        <br>
+        <br>
+
         <h4>
           <?php
               echo '<a href="./make_event.html">TOPページに戻る';

@@ -15,9 +15,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="stylesheet.css" >
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
   <script>
     $(function() {
       $("#datepicker").datepicker({
@@ -84,100 +84,72 @@
 
 <body class="bg-light">
 
-  <header>
-    <div class="row bg-primary text-left">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-4">
-        <strong>
-          <font size="7">調整くん</font>
-        </strong>
+  <header class = "header">
+    <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+          <h1>&#x1f4dd; 調整くん</h1>
       </div>
-      <div class="col-sm-4 text-left">
-        <strong>
+      <div class="col-sm-6 text-left">
           <p></p>
           <p>簡単出欠管理、日程調整ツール。</p>
           <p>効率良くスケジュールを決めましょう。</p>
-        </strong>
       </div>
-      <div class="col-sm-2"></div>
     </div>
+  </div>
   </header>
 
-  <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-5 text-left">
-      <font size="5">30秒で作れる!簡単出欠表</font>
-    </div>
-    <div class="col-sm-7"></div>
-  </div>
 
   <br>
-  <br>
-
+  <div class="container">
   <form action="./register_event.php" method="post">
     <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-7 text-left">
-        <div class="col-sm-3">
-          <font size="5">イベント名</font>
-          <p>120文字まで入力可能です。</p>
-        </div>
-        <div class="col-sm-4" align="left">
-          <!-- <input type="text" name=event_name> -->
-          <!-- 入力文字数120文字まで -->
-          <input type="text" name=event_name maxlength="120" onkeyup="ShowLength('inputlength1', value);">
-          <p id="inputlength1">0文字</p>
-        </div>
+        <h2>
+          30秒で作れる!簡単出欠表
+        </h2>
+        <table>
+        <tr>
+          <td>
+            <h3>イベント名</h3>
+            <p>120文字まで入力可能です。</p>
+          </td>
+          <td>
+            <input type="text" name=event_name class="event_name" maxlength="120" onkeyup="ShowLength('inputlength1', value);">
+            <p id="inputlength1">0文字</p>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <h3>イベント概要</h3>
+            <p>300文字まで入力可能です。</p>
+          </td>
+          <td>
+            <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard" onkeyup="ShowLength('inputlength2', value);"></textarea>
+            <p id="inputlength2">0文字</p>  
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <h3>候補日</h3>
+            <p>候補日程/日時を入力してください。<br>候補の区切りは改行で判断されます。</p>
+          </td>
+          <td>
+            <textarea name="event_dates" class="form-control" rows="10" cols="50" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
+          </td>
+          <td>
+            <input type="hidden" id="input" class="datepicker" >
+          </td>
+        </tr>
+      </table>
+      <div class="row">
+        <input type="submit" value="イベントを作成する" class="button">
+        <input type="reset" value="リセット" class="button">
       </div>
-      <div class="col-sm-3"></div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-7 text-left">
-        <div class="col-sm-3">
-          <font size="5">イベント概要</font>
-          <p>300文字まで入力可能です。</p>
-        </div>
-        <div class="col-sm-4" align="left">
-          <textarea name="free" placeholder="イベントの説明を入力してください(任意)" rows="10" cols="50" wrap="hard" onkeyup="ShowLength('inputlength2', value);"></textarea>
-          <p id="inputlength2">0文字</p>
-        </div>
       </div>
-      <div class="col-sm-4"></div>
     </div>
-
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-7 text-left">
-        <div class="col-sm-3">
-          <font size="5">候補日</font>
-          <p>候補日程/日時を入力してください。候補の区切りは改行で判断されます。</p>
-        </div>
-        <div class="col-sm-4" align="left">
-          <textarea name="event_dates" class="form-control" rows="10" cols="50" id="date_list" placeholder="2020年 5月30日 19:00〜"></textarea>
-          <input type="hidden" id="input" class="datepicker">
-        </div>
-      </div>
-      <div class="col-sm-4"></div>
-    </div>
-
-    <br>
-    <br>
-
-    <div class="row">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-7">
-        <div class="col-sm-3">
-          <input type="submit" value="イベントを作成する">
-        </div>
-        <div class="col-sm-4">
-          <input type="reset" value="リセット">
-        </div>
-      </div>
-      <div class="col-sm-1"></div>
-    </div>
-
+ 
   </form>
 
 

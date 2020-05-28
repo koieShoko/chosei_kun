@@ -1,0 +1,155 @@
+input{
+    margin:1em 3em;
+}
+.header{
+	background-color: #20366b;
+	color:#eae3e3;
+	padding:1em 0;
+	vertical-align: middle;
+}
+body{
+	background-color:#eae3e3;
+	color:#20366b;
+}
+h1{
+	font-size:2.5em;
+}
+h2{
+	border-bottom : 3px solid #20366b;
+	margin-bottom:20px;
+	padding: 0 0 10px;
+	font-size:2em;
+	
+}
+h3{
+	border-left: 6px ridge #20366b;
+	font-weight:bold;
+	font-size:1.5em;
+	margin-bottom: 20px;
+	padding: 3px 0 3px 10px;
+	margin : 2em 0;
+	
+}
+table{
+	width:100%;
+	margin:2em 0;
+
+}
+td{
+	width:30em;
+	padding:1em 1em;
+	vertical-align: top;
+
+}
+
+table tr td:nth-of-type(1){
+	width:20em;
+ }
+table tr td:nth-of-type(2){
+	vertical-align: middle;
+	width:15em;
+
+ }
+table tr td:nth-of-type(3){
+	vertical-align: top;
+	text-align: left;
+
+ }
+textarea ,.event_name{
+	padding:0;
+	margin:0;
+	width:100%;
+
+}
+textarea, #date_list{
+	height:10em;
+}
+input{
+	width:15em;
+}
+textarea, input, button, #date_list ,.button{
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+}
+textarea, .event_name ,#date_list ,input {
+	border: solid 0.1em #20366b;
+	border-radius: 0.5em;
+	padding:1em;
+	width:30em;
+}
+button,.button{
+	background-color: #20366b;
+	color:#eae3e3;
+	padding:0.5em;
+	border-radius: 0.5em;
+	font-size:1.25em;
+}
+button{
+	margin:0em;
+}
+a{
+	color: #20366b;
+}
+
+li {
+	list-style: none;
+	padding:0.25em 0;
+	
+  }
+label{
+	font-size:1em;
+
+}
+#condition_table_a table, 
+#condition_table_b table{
+	border:2px solid #20366b;
+
+}
+
+#condition_table_a td ,
+#condition_table_a th,
+#condition_table_b td,
+#condition_table_b th{
+	border:1px solid #20366b;
+	border-top:1px solid #20366b;
+	text-align:center;
+	width:100%;
+	min-width:10em;
+	max-width:25em;
+	border-radius:3px;
+	font-size:1em;
+	vertical-align: middle;
+}
+
+#condition_table_a th,
+#condition_table_b th{
+	background-color: #20366b;
+	color:#eae3e3;
+	border-right: solid 1px #eae3e3;
+	padding:1em 0;
+}
+select{
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	outline: none;
+	border:1px solid #20366b;
+	border-radius:0.5em;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	appearance: none;
+	padding:1em 1em;
+	margin-left:5em;
+	margin-top:1em;
+	width:10em;
+}
+
+.attendance{
+	margin-top:2em;
+
+}

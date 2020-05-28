@@ -21,6 +21,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
    <!-- Internet Explorer 8 以前のバージョンのための対策 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -29,24 +30,23 @@
 </head>
 
 <body>
-  <header>
-    <div class="row bg-primary text-left">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-4">
-        <strong>
-          <font size="7">調整くん</font>
-        </strong>
+
+<header class = "header">
+    <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+          <h1>&#x1f4dd; 調整くん</h1>
       </div>
-      <div class="col-sm-4 text-left">
-        <strong>
+      <div class="col-sm-6 text-left">
           <p></p>
           <p>簡単出欠管理、日程調整ツール。</p>
           <p>効率良くスケジュールを決めましょう。</p>
-        </strong>
       </div>
-      <div class="col-sm-2"></div>
     </div>
+  </div>
   </header>
+
+
 
 
     <!--  コンテンツ  -->
@@ -59,10 +59,18 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-        <h3>
-          <?php echo $message; ?>
-        </h3>
         <br>
+        <br>
+        <br>
+
+        <h4>
+          <?php echo $message; ?>
+        </h4>
+        <br>
+        <br>
+        <br>
+        <br>
+
         <h4>
           <?php
               echo '<a href="./make_event.html">TOPページに戻る';
